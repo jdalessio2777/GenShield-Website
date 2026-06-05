@@ -374,8 +374,20 @@
       document.getElementById('resultsSub').textContent = `${data.length} total referral${data.length !== 1 ? 's' : ''} · ${confirmed.length} confirmed`;
 
       // Active reward
-      if (pendingReward.length > 0) {
+      const total = confirmed.length;
+      if (total >= 7) {
         document.getElementById('activeRewardBox').style.display = 'flex';
+        document.getElementById('activeRewardText').style.color = 'var(--gold)';
+        document.getElementById('activeRewardText').textContent = 'Free Sentinel Plan Earned!';
+        document.getElementById('activeRewardSub').textContent = "You've earned a free Sentinel Plan. We'll apply it at your next renewal.";
+      } else if (total >= 5) {
+        document.getElementById('activeRewardBox').style.display = 'flex';
+        document.getElementById('activeRewardText').style.color = 'var(--gold)';
+        document.getElementById('activeRewardText').textContent = 'Free Guardian Plan Earned!';
+        document.getElementById('activeRewardSub').textContent = "You've earned a free Guardian Plan. We'll apply it at your next renewal.";
+      } else if (pendingReward.length > 0) {
+        document.getElementById('activeRewardBox').style.display = 'flex';
+        document.getElementById('activeRewardText').style.color = '';
         document.getElementById('activeRewardText').textContent = '10% Off Your Next Service';
         document.getElementById('activeRewardSub').textContent = 'This reward will be applied at your next service appointment. It never expires.';
       } else {
@@ -383,7 +395,6 @@
       }
 
       // Progress bars
-      const total = confirmed.length;
       document.getElementById('guardianCount').textContent = `${Math.min(total,5)}/5`;
       document.getElementById('sentinelCount').textContent = `${Math.min(total,7)}/7`;
       document.getElementById('guardianBar').style.width = `${Math.min(total/5*100, 100)}%`;
