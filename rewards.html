@@ -116,9 +116,24 @@
     footer a { color: var(--red-bright); }
 
     @media (max-width: 768px) {
-      .steps-grid { grid-template-columns: 1fr; }
-      .tiers-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; gap: 16px; }
+      .tiers-grid { grid-template-columns: 1fr; gap: 12px; }
       .forms-grid { grid-template-columns: 1fr; }
+      .rewards-hero { padding: 100px 4% 48px; }
+      .rewards-hero p { font-size: 16px; margin-bottom: 36px; }
+      .section { padding: 48px 4%; }
+      .form-card { padding: 24px 20px; }
+      .section-title { font-size: clamp(28px, 7vw, 40px); margin-bottom: 32px; }
+      nav { padding: 0 4%; }
+    }
+    @media (max-width: 480px) {
+      .rewards-hero { padding: 88px 4% 36px; }
+      .form-card { padding: 18px 14px; }
+      .rewards-hero h1 { font-size: clamp(32px, 10vw, 52px); }
+      .progress-label { flex-wrap: wrap; gap: 4px; }
+      .referral-row { flex-wrap: wrap; gap: 8px; align-items: flex-start; }
+      .btn-primary, .btn-secondary { font-size: 14px; padding: 12px; }
+      .tier-reward { font-size: 20px; }
     }
   </style>
 </head>
@@ -320,16 +335,21 @@
         if (error) throw error;
 
         // Also notify via Formspree
+        const formData = new FormData();
+        formData.append('_subject', `New Shield Rewards Referral — ${payload.referrer_name}`);
+        formData.append('referrer_name', payload.referrer_name);
+        formData.append('referrer_phone', payload.referrer_phone);
+        formData.append('referrer_email', payload.referrer_email || 'not provided');
+        formData.append('referred_name', payload.referred_name);
+        formData.append('referred_phone', payload.referred_phone || 'not provided');
+        formData.append('referred_email', payload.referred_email || 'not provided');
+        formData.append('plan', payload.plan_type === 'guardian' ? 'Guardian Plan (Annual $325)' : 'Sentinel Plan (Semi-Annual $575)');
+        formData.append('message', 'New referral submitted via Shield Rewards portal. Please confirm when customer signs up.');
+
         await fetch('https://formspree.io/f/mbdejgpn', {
           method: 'POST',
-          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            _subject: `New Shield Rewards Referral — ${payload.referrer_name}`,
-            referrer: `${payload.referrer_name} | ${payload.referrer_phone} | ${payload.referrer_email || 'no email'}`,
-            referred: `${payload.referred_name} | ${payload.referred_phone || 'no phone'} | ${payload.referred_email || 'no email'}`,
-            plan: payload.plan_type === 'guardian' ? 'Guardian Plan (Annual $325)' : 'Sentinel Plan (Semi-Annual $575)',
-            message: 'New referral submitted via Shield Rewards portal. Please confirm when customer signs up.'
-          })
+          headers: { 'Accept': 'application/json' },
+          body: formData
         });
 
         document.getElementById('submitSuccess').style.display = 'block';
