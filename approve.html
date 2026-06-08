@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Approve Your Quote — GenShield Generator Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --red: #CC2200; --red-bright: #E83A1E; --bg: #0D1014; --bg-2: #141820;
+      --bg-3: #1C2330; --border: #252E3C; --border-lit: #3A4556;
+      --silver: #A8B4C4; --text: #E8ECF2; --muted: #68788C; --white: #F4F6FA;
+      --green: #22c55e; --green-bg: rgba(34,197,94,0.08); --green-border: rgba(34,197,94,0.25);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    h1, h2, h3, h4 { font-family: 'Rajdhani', sans-serif; letter-spacing: 0.02em; line-height: 1.1; }
+
+    /* ── HEADER ── */
+    .header {
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .logo .gen   { color: #C8CDD5; }
+    .logo .shield { color: #E03010; }
+
+    /* ── LAYOUT ── */
+    .main {
+      min-height: calc(100vh - 63px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px 60px;
+    }
+
+    .state { display: none; width: 100%; max-width: 500px; }
+    .state.active { display: block; }
+
+    /* ── LOADING ── */
+    .spinner {
+      width: 48px; height: 48px;
+      border: 3px solid var(--border);
+      border-top-color: var(--red-bright);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text { text-align: center; color: var(--muted); font-size: 15px; }
+
+    /* ── APPROVAL CARD ── */
+    .card {
+      background: var(--white);
+      color: #111;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.55);
+    }
+    .card-header {
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 28px;
+      text-align: center;
+    }
+    .card-header .subtitle {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+    }
+    .card-body { padding: 28px; }
+
+    .quote-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 3px;
+    }
+    .customer-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 22px;
+    }
+
+    .detail-grid { margin-bottom: 20px; }
+    .detail-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-icon { font-size: 15px; margin-top: 2px; flex-shrink: 0; }
+    .detail-label {
+      font-size: 10px;
+      color: #aaa;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .detail-value { font-size: 15px; color: #222; font-weight: 500; }
+
+    .total-box {
+      background: #f8f9fa;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+    .total-label { font-size: 13px; color: #666; font-weight: 500; }
+    .total-amount {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .btn-approve {
+      width: 100%;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 17px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-approve:hover { background: var(--red-bright); }
+    .btn-approve:active { transform: scale(0.98); }
+    .btn-approve:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+
+    .call-hint {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 14px;
+      color: #999;
+    }
+    .call-hint a { color: #555; font-weight: 600; }
+
+    /* ── SUCCESS ── */
+    .success-card {
+      text-align: center;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px 32px;
+    }
+    .check-circle {
+      width: 80px; height: 80px;
+      background: var(--green-bg);
+      border: 2px solid var(--green-border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+    .check-circle svg { width: 36px; height: 36px; color: var(--green); }
+    .success-title {
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .success-body {
+      font-size: 16px;
+      color: var(--silver);
+      max-width: 380px;
+      margin: 0 auto 24px;
+      line-height: 1.65;
+    }
+    .success-call { font-size: 14px; color: var(--muted); }
+    .success-call a { color: var(--silver); font-weight: 600; }
+
+    /* ── ERRORS ── */
+    .error-card {
+      text-align: center;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px 32px;
+    }
+    .error-icon { font-size: 44px; margin-bottom: 18px; }
+    .error-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .error-body {
+      font-size: 15px;
+      color: var(--silver);
+      line-height: 1.6;
+    }
+    .error-body a { color: var(--red-bright); }
+
+    @media (max-width: 520px) {
+      .card-body { padding: 20px 18px; }
+      .success-card, .error-card { padding: 36px 20px; }
+      .success-title { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo"><span class="gen">Gen</span><span class="shield">Shield</span></div>
+  </div>
+
+  <div class="main">
+
+    <!-- Loading -->
+    <div id="state-loading" class="state active">
+      <div class="spinner"></div>
+      <p class="loading-text">Loading your quote…</p>
+    </div>
+
+    <!-- Approval UI -->
+    <div id="state-approve" class="state">
+      <div class="card">
+        <div class="card-header">
+          <div class="logo"><span class="gen">Gen</span><span class="shield">Shield</span></div>
+          <div class="subtitle">Service Quote</div>
+        </div>
+        <div class="card-body">
+          <div class="quote-label">Prepared for</div>
+          <div class="customer-name" id="customer-name">—</div>
+
+          <div class="detail-grid" id="detail-grid"></div>
+
+          <div class="total-box" id="total-box" style="display:none">
+            <span class="total-label">Estimated Total</span>
+            <span class="total-amount" id="total-amount">—</span>
+          </div>
+
+          <button class="btn-approve" id="btn-approve" onclick="approveQuote()">
+            ✓ &nbsp;Approve This Quote
+          </button>
+          <p class="call-hint">Or call <a href="tel:9737872431">(973) 787-2431</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success -->
+    <div id="state-success" class="state">
+      <div class="success-card">
+        <div class="check-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h2 class="success-title">Quote Approved!</h2>
+        <p class="success-body" id="success-msg"></p>
+        <p class="success-call">Questions? Call <a href="tel:9737872431">(973) 787-2431</a></p>
+      </div>
+    </div>
+
+    <!-- Already processed -->
+    <div id="state-processed" class="state">
+      <div class="error-card">
+        <div class="error-icon">📋</div>
+        <h2 class="error-title">Already Handled</h2>
+        <p class="error-body">This quote has already been handled. Call us at <a href="tel:9737872431">(973) 787-2431</a> if you have any questions.</p>
+      </div>
+    </div>
+
+    <!-- Invalid link -->
+    <div id="state-invalid" class="state">
+      <div class="error-card">
+        <div class="error-icon">🔗</div>
+        <h2 class="error-title">Invalid Link</h2>
+        <p class="error-body">This approval link is invalid or has expired. Please call us at <a href="tel:9737872431">(973) 787-2431</a>.</p>
+      </div>
+    </div>
+
+    <!-- Network error -->
+    <div id="state-error" class="state">
+      <div class="error-card">
+        <div class="error-icon">⚠️</div>
+        <h2 class="error-title">Something Went Wrong</h2>
+        <p class="error-body">Something went wrong. Please call us at <a href="tel:9737872431">(973) 787-2431</a>.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://ntpbjcvlzophmbowocwt.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im50cGJqY3Zsem9waG1ib3dvY3d0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5NDkyMzMsImV4cCI6MjA5MTUyNTIzM30.ufOlqsKm2vwGReg8ZEq2scvJUeUtySMZf9n2ZMzaFfE';
+    const { createClient } = supabase;
+    const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    let currentJob = null;
+
+    function showState(id) {
+      document.querySelectorAll('.state').forEach(el => el.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function formatCurrency(n) {
+      return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function addDetail(icon, label, value) {
+      if (!value) return;
+      const grid = document.getElementById('detail-grid');
+      const row = document.createElement('div');
+      row.className = 'detail-row';
+      row.innerHTML =
+        '<div class="detail-icon">' + icon + '</div>' +
+        '<div>' +
+          '<div class="detail-label">' + label + '</div>' +
+          '<div class="detail-value">' + value + '</div>' +
+        '</div>';
+      grid.appendChild(row);
+    }
+
+    async function init() {
+      const jobId = new URLSearchParams(window.location.search).get('job');
+
+      if (!jobId) {
+        showState('state-invalid');
+        return;
+      }
+
+      try {
+        const { data, error } = await db
+          .from('jobs')
+          .select('*, customers(name, email, address, generator_model, phone)')
+          .eq('id', jobId)
+          .single();
+
+        if (error || !data) {
+          showState('state-invalid');
+          return;
+        }
+
+        if (data.status !== 'quote_sent') {
+          showState('state-processed');
+          return;
+        }
+
+        currentJob = data;
+        const c = data.customers || {};
+
+        document.getElementById('customer-name').textContent = c.name || 'Valued Customer';
+
+        if (data.title || data.job_type) {
+          const svc = data.title || data.job_type.replace(/_/g, ' ').replace(/\b\w/g, ch => ch.toUpperCase());
+          addDetail('🔧', 'Service', svc);
+        }
+        if (c.generator_model) addDetail('⚡', 'Generator', c.generator_model);
+        if (c.address)         addDetail('📍', 'Address',   c.address);
+
+        const total = data.total_amount || data.total_price;
+        if (total) {
+          document.getElementById('total-amount').textContent = formatCurrency(total);
+          document.getElementById('total-box').style.display = 'flex';
+        }
+
+        showState('state-approve');
+      } catch (e) {
+        showState('state-error');
+      }
+    }
+
+    async function approveQuote() {
+      if (!currentJob) return;
+      const btn = document.getElementById('btn-approve');
+      btn.disabled = true;
+      btn.textContent = 'Approving…';
+
+      try {
+        const { error } = await db
+          .from('jobs')
+          .update({
+            status: 'scheduled',
+            customer_approved_at: new Date().toISOString(),
+            pending_confirmation: true,
+            approval_source: 'customer_email',
+          })
+          .eq('id', currentJob.id);
+
+        if (error) throw error;
+
+        const c = currentJob.customers || {};
+        const firstName = (c.name || '').split(' ')[0];
+        document.getElementById('success-msg').textContent =
+          'Thank you' + (firstName ? ' ' + firstName : '') +
+          ' — your appointment is confirmed. We will send you a confirmation email shortly with all the details.';
+
+        showState('state-success');
+      } catch (e) {
+        btn.disabled = false;
+        btn.innerHTML = '✓ &nbsp;Approve This Quote';
+        showState('state-error');
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
