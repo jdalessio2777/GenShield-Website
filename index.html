@@ -1159,6 +1159,7 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     function toggleMenu() {
       document.getElementById('mobileMenu').classList.toggle('open');
@@ -1200,6 +1201,8 @@
     window.addEventListener('scroll', () => {
       document.getElementById('nav').style.background = window.scrollY > 60 ? 'rgba(13,16,20,0.98)' : 'rgba(13,16,20,0.92)';
     });
+    const SUPABASE_URL = 'https://ntpbjcvlzophmbowocwt.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im50cGJqY3Zsem9waG1ib3dvY3d0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5NDkyMzMsImV4cCI6MjA5MTUyNTIzM30.ufOlqsKm2vwGReg8ZEq2scvJUeUtySMZf9n2ZMzaFfE';
     const form = document.getElementById('contactForm');
     if (form) {
       form.addEventListener('submit', async (e) => {
@@ -1207,11 +1210,34 @@
         const btn = form.querySelector('.form-submit');
         btn.textContent = 'Sending...';
         btn.disabled = true;
+        const firstName = form.querySelector('[name="first_name"]').value;
+        const lastName = form.querySelector('[name="last_name"]').value;
+        const phone = form.querySelector('[name="phone"]').value;
+        const email = form.querySelector('[name="email"]').value;
+        const service = form.querySelector('[name="service"]').value;
+        const generator = form.querySelector('[name="generator"]').value;
+        const message = form.querySelector('[name="message"]').value;
         try {
           const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
           if (res.ok) {
             form.style.display = 'none';
             document.getElementById('formSuccess').style.display = 'block';
+            try {
+              const { createClient } = window.supabase;
+              const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+              await db.from('service_requests').insert([{
+                source: 'website_form',
+                status: 'new',
+                name: [firstName, lastName].filter(Boolean).join(' '),
+                phone: phone,
+                email: email,
+                service_type: service,
+                generator_info: generator,
+                message: message
+              }]);
+            } catch (err) {
+              console.warn('GenFlow sync failed:', err);
+            }
           } else {
             btn.textContent = 'Error — Try Again';
             btn.disabled = false;
