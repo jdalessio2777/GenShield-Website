@@ -357,14 +357,25 @@
     }
 
     async function init() {
-      const jobId = new URLSearchParams(window.location.search).get('job');
+      const params = new URLSearchParams(window.location.search);
+      const jobId = params.get('job');
+      const token = params.get('token');
 
-      if (!jobId) {
+      if (!jobId || !token) {
         showState('state-invalid');
         return;
       }
 
       try {
+        const validRes = await fetch(
+          `https://genflow-pro.vercel.app/api/validate-quote-token?job_id=${encodeURIComponent(jobId)}&token=${encodeURIComponent(token)}`
+        );
+        const validData = await validRes.json();
+        if (!validData.valid) {
+          showState('state-invalid');
+          return;
+        }
+
         const { data, error } = await db
           .from('jobs')
           .select('*, customers(name, email, address, generator_model, phone)')
