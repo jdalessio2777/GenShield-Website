@@ -236,6 +236,7 @@
     .service-card {
       background: var(--bg-2); padding: 44px 40px;
       transition: background 0.2s; position: relative; overflow: hidden;
+      display: block; text-decoration: none; color: inherit;
     }
     .service-card::before {
       content: ''; position: absolute; top: 0; left: 0;
@@ -623,6 +624,8 @@
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#area">Service Area</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="/emergency">Emergency</a></li>
+      <li><a href="/installations">Installations</a></li>
       <li><a href="tel:9737872431" onclick="return gtag_report_conversion('tel:9737872431');" class="nav-cta">&#128222; Call Now</a></li>
     </ul>
     <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
@@ -636,6 +639,8 @@
     <a href="#pricing" onclick="toggleMenu()">Pricing</a>
     <a href="#area" onclick="toggleMenu()">Service Area</a>
     <a href="#contact" onclick="toggleMenu()">Contact</a>
+    <a href="/emergency" onclick="toggleMenu()">Emergency</a>
+    <a href="/installations" onclick="toggleMenu()">Installations</a>
     <a href="tel:9737872431" onclick="return gtag_report_conversion('tel:9737872431');" style="color: var(--red-bright);">&#128222; 973-787-2431</a>
   </div>
 
@@ -712,32 +717,32 @@
     <div class="section-inner">
       <div class="section-label">What We Do</div>
       <h2 class="section-title">Generator Services <span>Built Around You</span></h2>
-      <p class="section-sub">We don&#39;t install generators — we keep them running. Service and maintenance is all we do, which means you get specialists, not generalists.</p>
+      <p class="section-sub">From routine maintenance to full installation, we keep your generator running. Certified specialists, not generalists.</p>
       <div class="services-grid reveal">
-        <div class="service-card">
+        <a href="#pricing" class="service-card">
           <span class="service-icon">&#128737;&#65039;</span>
           <div class="service-name">Annual Service Agreement</div>
           <p class="service-desc">One annual maintenance visit covering full inspection, oil &amp; filter change, spark plugs, air filter, valve adjustment (if applicable), and test run. Members receive 10% off all repairs and parts throughout the year.</p>
           <div class="service-price">$325 <span>/ year</span></div>
-        </div>
-        <div class="service-card">
+        </a>
+        <a href="#services" class="service-card">
           <span class="service-icon">&#128295;</span>
           <div class="service-name">Diagnostic &amp; Repair</div>
           <p class="service-desc">Something isn&#39;t right with your generator? We diagnose it fast and fix it right. Flat-rate pricing on all common repairs — no surprise hourly billing. First 30 minutes always $125.</p>
           <div class="service-price">$125 <span>diagnostic</span></div>
-        </div>
-        <div class="service-card">
+        </a>
+        <a href="/emergency" class="service-card">
           <span class="service-icon">&#128680;</span>
           <div class="service-name">Emergency Service</div>
           <p class="service-desc">Generator down during a storm? We respond. After-hours and weekend emergency calls taken directly. Press 1 on our business line for immediate emergency dispatch.</p>
           <div class="service-price">$245&ndash;$340 <span>/ hr after hours</span></div>
-        </div>
-        <div class="service-card">
-          <span class="service-icon">&#9881;&#65039;</span>
-          <div class="service-name">One-Time Maintenance</div>
-          <p class="service-desc">Not ready for an agreement? No problem. Book a one-time full tune-up for your air-cooled or liquid-cooled unit. Everything from filters to fluids &mdash; in one visit.</p>
-          <div class="service-price">$295 <span>air-cooled tune-up</span></div>
-        </div>
+        </a>
+        <a href="/installations" class="service-card">
+          <span class="service-icon">&#127968;</span>
+          <div class="service-name">Installation</div>
+          <p class="service-desc">Generac Authorized Dealer. New standby generator installs handled start to finish — sizing, permits, and setup.</p>
+          <div class="service-price">Free Quote <span>Generac authorized</span></div>
+        </a>
       </div>
     </div>
   </section>
@@ -753,8 +758,8 @@
           <div class="why-feature">
             <div class="why-feature-icon">&#127919;</div>
             <div>
-              <div class="why-feature-title">Service-Only Specialists</div>
-              <div class="why-feature-desc">We don&#39;t sell or install generators. 100% of our expertise goes into servicing them. You&#39;re not getting a generalist who handles HVAC too.</div>
+              <div class="why-feature-title">Generator Specialists</div>
+              <div class="why-feature-desc">From installation to repair, 100% of our expertise is generators — start to finish. You&#39;re not getting a generalist who handles HVAC too.</div>
             </div>
           </div>
           <div class="why-feature">
@@ -1152,7 +1157,8 @@
             <li><a href="#pricing">Sentinel Plan (Semi-Annual)</a></li>
             <li><a href="#pricing">Single Shield Tune-Up</a></li>
             <li><a href="#services">Diagnostic &amp; Repair</a></li>
-            <li><a href="#services">Emergency Service</a></li>
+            <li><a href="/emergency">Emergency Service</a></li>
+            <li><a href="/installations">Installation</a></li>
           </ul>
         </div>
         <div>

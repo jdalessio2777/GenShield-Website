@@ -2,6 +2,8 @@
   "rewrites": [
     { "source": "/rewards", "destination": "/rewards.html" },
     { "source": "/approve", "destination": "/approve.html" },
+    { "source": "/emergency", "destination": "/emergency.html" },
+    { "source": "/installations", "destination": "/installations.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

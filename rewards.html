@@ -49,6 +49,7 @@
     nav { position: fixed; top:0; left:0; right:0; z-index:900; background: rgba(13,16,20,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 5%; height: 70px; display: flex; align-items: center; justify-content: space-between; }
     .nav-logo { font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 0.05em; }
     .nav-logo span { color: var(--red-bright); }
+    .nav-links-simple { display: flex; align-items: center; gap: 24px; }
     .nav-back { font-size: 14px; color: var(--silver); display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
     .nav-back:hover { color: var(--white); }
 
@@ -149,8 +150,11 @@
       .form-card { padding: 24px 20px; }
       .section-title { font-size: clamp(28px, 7vw, 40px); margin-bottom: 32px; }
       nav { padding: 0 4%; }
+      .nav-links-simple { gap: 14px; }
+      .nav-links-simple a { font-size: 13px; }
     }
     @media (max-width: 480px) {
+      .nav-links-simple a:not(.nav-back) { display: none; }
       .rewards-hero { padding: 88px 4% 36px; }
       .form-card { padding: 18px 14px; }
       .rewards-hero h1 { font-size: clamp(32px, 10vw, 52px); }
@@ -165,7 +169,11 @@
 
   <nav>
     <div class="nav-logo"><span>Gen</span>Shield</div>
-    <a href="/" class="nav-back">← Back to Main Site</a>
+    <div class="nav-links-simple">
+      <a href="/emergency">Emergency</a>
+      <a href="/installations">Installations</a>
+      <a href="/" class="nav-back">← Back to Main Site</a>
+    </div>
   </nav>
 
   <div class="rewards-hero">

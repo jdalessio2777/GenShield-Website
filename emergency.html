@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18390258091"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18390258091');
+  </script>
+  <script>
+  function gtag_report_conversion(url) {
+    var callback = function () {
+      if (typeof(url) != 'undefined') {
+        window.location = url;
+      }
+    };
+    gtag('event', 'conversion', {
+        'send_to': 'AW-18390258091/mGtOCIvDx-QcEKujlMFE',
+        'value': 1.0,
+        'currency': 'USD',
+        'event_callback': callback
+    });
+    return false;
+  }
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emergency Generator Service — GenShield</title>
+  <meta name="description" content="Generator down during a power outage? Call GenShield now for immediate emergency dispatch. North Jersey standby generator service, 24/7." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #CC2200; --red-bright: #E83A1E; --bg: #0D1014; --bg-2: #141820;
+      --bg-3: #1C2330; --border: #252E3C; --border-lit: #3A4556;
+      --silver: #A8B4C4; --text: #E8ECF2; --muted: #68788C; --white: #F4F6FA;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    h1,h2,h3,h4 { font-family: 'Rajdhani', sans-serif; letter-spacing: 0.02em; line-height: 1.1; }
+
+    /* NAV */
+    nav { position: fixed; top:0; left:0; right:0; z-index:900; background: rgba(13,16,20,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 5%; height: 70px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 0.05em; }
+    .nav-logo span { color: var(--red-bright); }
+    .nav-links-simple { display: flex; align-items: center; gap: 24px; }
+    .nav-back { font-size: 14px; color: var(--silver); display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--white); }
+
+    /* HERO */
+    .emergency-hero { padding: 140px 5% 100px; text-align: center; position: relative; overflow: hidden; min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .emergency-hero::before { content:''; position:absolute; inset:0; background-image: linear-gradient(rgba(204,34,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(204,34,0,0.05) 1px, transparent 1px); background-size: 60px 60px; opacity: 0.6; }
+    .emergency-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(204,34,0,0.1); border: 1px solid rgba(204,34,0,0.3); color: var(--red-bright); font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; margin-bottom: 28px; position: relative; }
+    .emergency-hero h1 { font-size: clamp(40px, 6vw, 68px); font-weight: 700; color: var(--white); margin-bottom: 40px; position: relative; max-width: 780px; }
+    .emergency-hero h1 span { color: var(--red-bright); }
+    .emergency-phone { position: relative; }
+    .emergency-phone a { display: block; font-family: 'Rajdhani', sans-serif; font-size: clamp(38px, 7vw, 64px); font-weight: 700; color: var(--white); margin-bottom: 28px; transition: color 0.2s; }
+    .emergency-phone a:hover { color: var(--red-bright); }
+    .btn-call-now { position: relative; display: inline-flex; align-items: center; gap: 12px; background: var(--red); color: var(--white); padding: 20px 48px; border-radius: 6px; font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; transition: background 0.2s, transform 0.15s; margin-bottom: 32px; }
+    .btn-call-now:hover { background: var(--red-bright); transform: translateY(-1px); }
+    .emergency-reassurance { position: relative; font-size: 16px; color: var(--silver); max-width: 520px; line-height: 1.7; }
+
+    /* FOOTER */
+    footer { background: var(--bg-2); border-top: 1px solid var(--border); padding: 32px 5%; text-align: center; }
+    footer p { font-size: 13px; color: var(--muted); }
+    footer a { color: var(--red-bright); }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 4%; }
+      .nav-links-simple { gap: 14px; }
+      .nav-links-simple a { font-size: 13px; }
+      .emergency-hero { padding: 110px 4% 64px; min-height: unset; }
+      .btn-call-now { padding: 16px 36px; font-size: 17px; }
+    }
+    @media (max-width: 480px) {
+      .nav-links-simple a:not(.nav-back) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo"><span>Gen</span>Shield</div>
+    <div class="nav-links-simple">
+      <a href="/emergency">Emergency</a>
+      <a href="/installations">Installations</a>
+      <a href="/" class="nav-back">← Back to Main Site</a>
+    </div>
+  </nav>
+
+  <div class="emergency-hero">
+    <div class="emergency-badge">🚨 Emergency Service</div>
+    <h1>Power down? <span>We're one call away.</span></h1>
+    <div class="emergency-phone">
+      <a href="tel:9737872431" onclick="return gtag_report_conversion('tel:9737872431');">973-787-2431</a>
+    </div>
+    <a href="tel:9737872431" onclick="return gtag_report_conversion('tel:9737872431');" class="btn-call-now">📞 Call Now</a>
+    <p class="emergency-reassurance">We respond fast, day or night. If your generator didn't start when the power went out, call us directly — no forms, no wait.</p>
+  </div>
+
+  <footer>
+    <p>North Jersey standby generator service &middot; <a href="tel:9737872431" onclick="return gtag_report_conversion('tel:9737872431');">973-787-2431</a> &middot; <a href="mailto:contact@genshieldservice.com">contact@genshieldservice.com</a></p>
+    <p style="margin-top:8px;">© 2026 GenShield LLC · <a href="/">Back to Main Site</a></p>
+  </footer>
+
+</body>
+</html>

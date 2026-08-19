@@ -57,7 +57,7 @@
       padding: 18px 5%;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
     }
     .logo {
       font-family: 'Rajdhani', sans-serif;
@@ -67,6 +67,9 @@
     }
     .logo .gen   { color: #C8CDD5; }
     .logo .shield { color: #E03010; }
+    .header-links { display: flex; align-items: center; gap: 20px; }
+    .header-links a { font-size: 13px; color: var(--silver); text-decoration: none; transition: color 0.2s; }
+    .header-links a:hover { color: var(--text); }
 
     /* ── LAYOUT ── */
     .main {
@@ -263,6 +266,8 @@
       .card-body { padding: 20px 18px; }
       .success-card, .error-card { padding: 36px 20px; }
       .success-title { font-size: 30px; }
+      .header-links { gap: 12px; }
+      .header-links a:not(:last-child) { display: none; }
     }
   </style>
 </head>
@@ -270,6 +275,11 @@
 
   <div class="header">
     <div class="logo"><span class="gen">Gen</span><span class="shield">Shield</span></div>
+    <div class="header-links">
+      <a href="/emergency">Emergency</a>
+      <a href="/installations">Installations</a>
+      <a href="/">← Back to Main Site</a>
+    </div>
   </div>
 
   <div class="main">
