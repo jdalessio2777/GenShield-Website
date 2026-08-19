@@ -1,6 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18390258091"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18390258091');
+  </script>
+  <script>
+  function gtag_report_conversion(url) {
+    var callback = function () {
+      if (typeof(url) != 'undefined') {
+        window.location = url;
+      }
+    };
+    gtag('event', 'conversion', {
+        'send_to': 'AW-18390258091/mGtOCIvDx-QcEKujlMFE',
+        'value': 1.0,
+        'currency': 'USD',
+        'event_callback': callback
+    });
+    return false;
+  }
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shield Rewards — GenShield Generator Service</title>
@@ -300,7 +324,7 @@
   </section>
 
   <footer>
-    <p>Questions about Shield Rewards? Call us at <a href="tel:9737872431">973-787-2431</a> or email <a href="mailto:contact@genshieldservice.com">contact@genshieldservice.com</a></p>
+    <p>Questions about Shield Rewards? Call us at <a href="tel:9737872431" onclick="return gtag_report_conversion('tel:9737872431');">973-787-2431</a> or email <a href="mailto:contact@genshieldservice.com">contact@genshieldservice.com</a></p>
     <p style="margin-top:8px;">© 2026 GenShield LLC · <a href="/">Back to Main Site</a></p>
   </footer>
 

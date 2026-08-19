@@ -1,6 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18390258091"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18390258091');
+  </script>
+  <script>
+  function gtag_report_conversion(url) {
+    var callback = function () {
+      if (typeof(url) != 'undefined') {
+        window.location = url;
+      }
+    };
+    gtag('event', 'conversion', {
+        'send_to': 'AW-18390258091/mGtOCIvDx-QcEKujlMFE',
+        'value': 1.0,
+        'currency': 'USD',
+        'event_callback': callback
+    });
+    return false;
+  }
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Approve Your Quote — GenShield Generator Service</title>
@@ -277,7 +301,7 @@
           <button class="btn-approve" id="btn-approve" onclick="approveQuote()">
             ✓ &nbsp;Approve This Quote
           </button>
-          <p class="call-hint">Or call <a href="tel:9737872431">(973) 787-2431</a></p>
+          <p class="call-hint">Or call <a href="tel:9737872431" onclick="return gtag_report_conversion('tel:9737872431');">(973) 787-2431</a></p>
         </div>
       </div>
     </div>
@@ -292,7 +316,7 @@
         </div>
         <h2 class="success-title">Quote Approved!</h2>
         <p class="success-body" id="success-msg"></p>
-        <p class="success-call">Questions? Call <a href="tel:9737872431">(973) 787-2431</a></p>
+        <p class="success-call">Questions? Call <a href="tel:9737872431" onclick="return gtag_report_conversion('tel:9737872431');">(973) 787-2431</a></p>
       </div>
     </div>
 
@@ -301,7 +325,7 @@
       <div class="error-card">
         <div class="error-icon">📋</div>
         <h2 class="error-title">Already Handled</h2>
-        <p class="error-body">This quote has already been handled. Call us at <a href="tel:9737872431">(973) 787-2431</a> if you have any questions.</p>
+        <p class="error-body">This quote has already been handled. Call us at <a href="tel:9737872431" onclick="return gtag_report_conversion('tel:9737872431');">(973) 787-2431</a> if you have any questions.</p>
       </div>
     </div>
 
@@ -310,7 +334,7 @@
       <div class="error-card">
         <div class="error-icon">🔗</div>
         <h2 class="error-title">Invalid Link</h2>
-        <p class="error-body">This approval link is invalid or has expired. Please call us at <a href="tel:9737872431">(973) 787-2431</a>.</p>
+        <p class="error-body">This approval link is invalid or has expired. Please call us at <a href="tel:9737872431" onclick="return gtag_report_conversion('tel:9737872431');">(973) 787-2431</a>.</p>
       </div>
     </div>
 
@@ -319,7 +343,7 @@
       <div class="error-card">
         <div class="error-icon">⚠️</div>
         <h2 class="error-title">Something Went Wrong</h2>
-        <p class="error-body">Something went wrong. Please call us at <a href="tel:9737872431">(973) 787-2431</a>.</p>
+        <p class="error-body">Something went wrong. Please call us at <a href="tel:9737872431" onclick="return gtag_report_conversion('tel:9737872431');">(973) 787-2431</a>.</p>
       </div>
     </div>
 
