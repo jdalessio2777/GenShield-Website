@@ -279,6 +279,26 @@
     }
     .cert-name { font-family: 'Rajdhani', sans-serif; font-size: 17px; font-weight: 600; color: var(--white); }
     .cert-detail { font-size: 13px; color: var(--muted); }
+    .reviews-features { display: flex; flex-direction: column; gap: 20px; }
+    .reviews-skeleton { height: 96px; border-radius: 8px; background: linear-gradient(90deg, var(--bg-2) 25%, var(--bg-3) 37%, var(--bg-2) 63%); background-size: 400% 100%; animation: skeletonPulse 1.6s ease infinite; }
+    @keyframes skeletonPulse { 0% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+    .reviews-summary { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; background: var(--bg-3); border: 1px solid var(--border); border-radius: 8px; padding: 28px 32px; }
+    .reviews-rating-number { font-family: 'Rajdhani', sans-serif; font-size: 48px; font-weight: 700; color: var(--white); line-height: 1; }
+    .reviews-stars-big { color: var(--gold); font-size: 20px; letter-spacing: 3px; }
+    .reviews-count-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+    .reviews-cta { margin-left: auto; white-space: nowrap; }
+    .reviews-grid { display: flex; flex-direction: column; gap: 16px; }
+    .review-card { background: var(--bg-3); border: 1px solid var(--border); border-radius: 6px; padding: 22px 24px; transition: border-color 0.2s; }
+    .review-card:hover { border-color: var(--border-lit); }
+    .review-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .review-avatar { width: 38px; height: 38px; border-radius: 50%; background: rgba(204,34,0,0.12); border: 1px solid rgba(204,34,0,0.3); display: flex; align-items: center; justify-content: center; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 15px; color: var(--red-bright); flex-shrink: 0; }
+    .review-author { font-family: 'Rajdhani', sans-serif; font-weight: 700; color: var(--white); font-size: 15px; }
+    .review-stars { color: var(--gold); font-size: 12px; letter-spacing: 2px; margin-top: 1px; }
+    .review-date { margin-left: auto; font-size: 12px; color: var(--muted); white-space: nowrap; }
+    .review-text { font-size: 14px; color: var(--silver); line-height: 1.6; }
+    .reviews-fallback { background: var(--bg-3); border: 1px solid var(--border); border-radius: 8px; padding: 36px 32px; text-align: center; }
+    .reviews-fallback-stars { color: var(--gold); font-size: 22px; letter-spacing: 4px; margin-bottom: 14px; }
+    .reviews-fallback-text { font-size: 14px; color: var(--silver); margin-bottom: 22px; line-height: 1.6; }
     .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .stat-box { background: var(--bg-3); border: 1px solid var(--border); border-radius: 6px; padding: 24px; text-align: center; }
     .stat-number { font-family: 'Rajdhani', sans-serif; font-size: 44px; font-weight: 700; color: var(--red-bright); line-height: 1; display: block; }
@@ -422,6 +442,8 @@
       .trust-bar-inner { grid-template-columns: repeat(2, 1fr); }
       .why-grid { grid-template-columns: 1fr; gap: 40px; }
       .why-certifications { position: static; }
+      .reviews-summary { flex-direction: column; align-items: flex-start; }
+      .reviews-cta { margin-left: 0; }
       .footer-top { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
@@ -624,7 +646,7 @@
     </div>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
-      <li><a href="#why">Why Us</a></li>
+      <li><a href="#reviews">Reviews</a></li>
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#area">Service Area</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -751,49 +773,15 @@
     </div>
   </section>
 
-  <!-- WHY CHOOSE US -->
-  <section id="why" style="background: var(--bg-2);">
+  <!-- REVIEWS -->
+  <section id="reviews" style="background: var(--bg-2);">
     <div class="section-inner">
-      <div class="section-label">Why Choose Us</div>
-      <h2 class="section-title">Experience You Can <span>Count On</span></h2>
-      <p class="section-sub">8+ years in the field, certified on every major platform, and built around one thing — keeping your generator running when your family needs it most.</p>
+      <div class="section-label">Customer Reviews</div>
+      <h2 class="section-title">What Our Customers <span>Are Saying</span></h2>
+      <p class="section-sub">Real feedback from real homeowners, verified through Google — see why families across Morris County trust GenShield to keep their generators running.</p>
       <div class="why-grid">
-        <div class="why-features reveal">
-          <div class="why-feature">
-            <div class="why-feature-icon">&#127919;</div>
-            <div>
-              <div class="why-feature-title">Generator Specialists</div>
-              <div class="why-feature-desc">From installation to repair, 100% of our expertise is generators — start to finish. You&#39;re not getting a generalist who handles HVAC too.</div>
-            </div>
-          </div>
-          <div class="why-feature">
-            <div class="why-feature-icon">&#128200;</div>
-            <div>
-              <div class="why-feature-title">Significantly Lower Prices</div>
-              <div class="why-feature-desc">Our annual agreement at $325 is what competitors charge for a single visit. One-time tune-up at $295 vs the industry average of $340&ndash;$400+.</div>
-            </div>
-          </div>
-          <div class="why-feature">
-            <div class="why-feature-icon">&#128241;</div>
-            <div>
-              <div class="why-feature-title">Professional Field Technology</div>
-              <div class="why-feature-desc">We use custom-built field service software for every job &mdash; digital quotes, electronic signatures, real-time service records, and instant invoicing.</div>
-            </div>
-          </div>
-          <div class="why-feature">
-            <div class="why-feature-icon">&#128682;</div>
-            <div>
-              <div class="why-feature-title">24/7 Emergency Response</div>
-              <div class="why-feature-desc">When your generator fails during a storm or outage, you need someone who actually picks up. We do. Our emergency line runs around the clock &mdash; real technicians, real responses, no voicemail runaround.</div>
-            </div>
-          </div>
-          <div class="why-feature">
-            <div class="why-feature-icon">&#128203;</div>
-            <div>
-              <div class="why-feature-title">Flat-Rate Repair Pricing</div>
-              <div class="why-feature-desc">All common repairs are flat rate — batteries, starters, control boards, oil pressure switches. You know the price before we start. No surprises.</div>
-            </div>
-          </div>
+        <div class="reviews-features reveal">
+          <div id="reviewsContainer" aria-live="polite"></div>
         </div>
         <div class="why-certifications reveal">
           <div class="cert-card">
@@ -1168,7 +1156,7 @@
         <div>
           <div class="footer-col-title">Company</div>
           <ul class="footer-links">
-            <li><a href="#why">Why Choose Us</a></li>
+            <li><a href="#reviews">Reviews</a></li>
             <li><a href="#pricing">Pricing</a></li>
             <li><a href="#area">Service Area</a></li>
             <li><a href="/rewards">Shield Rewards</a></li>
@@ -1282,6 +1270,80 @@
         }
       });
     }
+
+    (function loadReviews() {
+      const container = document.getElementById('reviewsContainer');
+      if (!container) return;
+
+      const LEAVE_REVIEW_URL = 'https://g.page/r/CTZ_-W7KWjXzEAE/review';
+      const stars = (n) => '★'.repeat(Math.round(n || 0)) + '☆'.repeat(5 - Math.round(n || 0));
+      const escapeHtml = (s) => String(s || '').replace(/[&<>"']/g, (c) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+
+      function renderFallback() {
+        container.innerHTML = `
+          <div class="reviews-fallback">
+            <div class="reviews-fallback-stars">★★★★★</div>
+            <div class="reviews-fallback-text">GenShield is proud to be Google-reviewed by homeowners across Morris County.</div>
+            <a href="${LEAVE_REVIEW_URL}" target="_blank" rel="noopener" class="btn-secondary reviews-cta">Leave Us a Review</a>
+          </div>`;
+      }
+
+      function renderReviews(data) {
+        if (!data || !data.rating || !data.reviews || data.reviews.length === 0) {
+          renderFallback();
+          return;
+        }
+
+        const cards = data.reviews.map((r) => {
+          const initial = (r.authorName || 'G').trim().charAt(0).toUpperCase();
+          return `
+            <div class="review-card">
+              <div class="review-card-header">
+                <div class="review-avatar">${escapeHtml(initial)}</div>
+                <div>
+                  <div class="review-author">${escapeHtml(r.authorName)}</div>
+                  <div class="review-stars">${stars(r.rating)}</div>
+                </div>
+                <div class="review-date">${escapeHtml(r.relativeTime)}</div>
+              </div>
+              <div class="review-text">${escapeHtml(r.text)}</div>
+            </div>`;
+        }).join('');
+
+        container.innerHTML = `
+          <div class="reviews-summary">
+            <div>
+              <div class="reviews-rating-number">${data.rating.toFixed(1)}</div>
+            </div>
+            <div>
+              <div class="reviews-stars-big">${stars(data.rating)}</div>
+              <div class="reviews-count-label">${data.userRatingCount || 0} Google Reviews</div>
+            </div>
+            <a href="${LEAVE_REVIEW_URL}" target="_blank" rel="noopener" class="btn-secondary reviews-cta">Leave Us a Review</a>
+          </div>
+          <div class="reviews-grid">${cards}</div>`;
+      }
+
+      container.innerHTML = '<div class="reviews-skeleton"></div>';
+
+      fetch('/api/reviews')
+        .then((res) => {
+          if (!res.ok) throw new Error('reviews fetch failed');
+          return res.json();
+        })
+        .then((data) => {
+          if (data && data.error) {
+            renderFallback();
+          } else {
+            renderReviews(data);
+          }
+        })
+        .catch(() => {
+          renderFallback();
+        });
+    })();
   </script>
 </body>
 </html>
