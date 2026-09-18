@@ -56,6 +56,12 @@
     .nav-links-simple { display: flex; align-items: center; gap: 24px; }
     .nav-back { font-size: 14px; color: var(--silver); display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
     .nav-back:hover { color: var(--white); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--text); transition: all 0.3s; }
+    .mobile-menu { display: none; position: fixed; top: 70px; left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--border); padding: 24px 5%; z-index: 899; flex-direction: column; gap: 20px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 600; color: var(--silver); letter-spacing: 0.05em; text-transform: uppercase; padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .mobile-menu a:last-child { border-bottom: none; }
 
     /* HERO */
     .rewards-hero { padding: 120px 5% 80px; text-align: center; position: relative; overflow: hidden; }
@@ -154,11 +160,10 @@
       .form-card { padding: 24px 20px; }
       .section-title { font-size: clamp(28px, 7vw, 40px); margin-bottom: 32px; }
       nav { padding: 0 4%; }
-      .nav-links-simple { gap: 14px; }
-      .nav-links-simple a { font-size: 13px; }
+      .nav-links-simple { display: none; }
+      .nav-hamburger { display: flex; }
     }
     @media (max-width: 480px) {
-      .nav-links-simple a:not(.nav-back) { display: none; }
       .rewards-hero { padding: 88px 4% 36px; }
       .form-card { padding: 18px 14px; }
       .rewards-hero h1 { font-size: clamp(32px, 10vw, 52px); }
@@ -178,7 +183,16 @@
       <a href="/installations">Installations</a>
       <a href="/" class="nav-back">← Back to Main Site</a>
     </div>
+    <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
   </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/emergency" onclick="toggleMenu()">Emergency</a>
+    <a href="/installations" onclick="toggleMenu()">Installations</a>
+    <a href="/" onclick="toggleMenu()">← Back to Main Site</a>
+  </div>
 
   <div class="rewards-hero">
     <div class="rewards-badge">🛡️ Shield Rewards Program</div>
@@ -341,6 +355,15 @@
   </footer>
 
   <script>
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+    document.addEventListener('click', (e) => {
+      const menu = document.getElementById('mobileMenu');
+      const hamburger = document.getElementById('hamburger');
+      if (!menu.contains(e.target) && !hamburger.contains(e.target)) menu.classList.remove('open');
+    });
+
     const SUPABASE_URL = 'https://ntpbjcvlzophmbowocwt.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im50cGJqY3Zsem9waG1ib3dvY3d0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5NDkyMzMsImV4cCI6MjA5MTUyNTIzM30.ufOlqsKm2vwGReg8ZEq2scvJUeUtySMZf9n2ZMzaFfE';
     const { createClient } = supabase;
